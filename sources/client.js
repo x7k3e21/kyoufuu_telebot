@@ -2,11 +2,23 @@
 const grammy = require("grammy");
 const express = require("express");
 
+const os = require("node:os");
+
+const processID = process.pid;
+
 const client = new grammy.Bot(process.env.CLIENT_TOKEN || "");
 
 client.command("start", (context) =>
 {
     context.reply(`Hello, ${context.from.username}`);
+});
+
+client.command("machine", (context) =>
+{
+    const hostName = os.hostname();
+    const hostArch = os.machine();
+
+    context.reply(`Host name: ${hostName}\nHost arch: ${hostArch}`);
 });
 
 if(process.env.NODE_ENV == "production")
