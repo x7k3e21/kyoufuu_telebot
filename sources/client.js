@@ -8,17 +8,12 @@ const processID = process.pid;
 
 const client = new grammy.Bot(process.env.CLIENT_TOKEN || "");
 
-client.command("start", (context) =>
-{
-    context.reply(`Hello, ${context.from.username}`);
-});
-
-client.command("machine", (context) =>
+client.command("machine", async (context) =>
 {
     const hostName = os.hostname();
     const hostArch = os.machine();
 
-    context.reply(`Host name: ${hostName}\nHost arch: ${hostArch}`);
+    await context.reply(`Host name: ${hostName}\nHost arch: ${hostArch}`);
 });
 
 if(process.env.NODE_ENV == "production")
@@ -27,6 +22,14 @@ if(process.env.NODE_ENV == "production")
 
     application.use(express.json());
     application.use(grammy.webhookCallback(client, "express"));
+
+    application.get("/debug", (request, response) =>
+    {
+        const hostName = os.hostname();
+        const hostArch = os.machine();
+
+        response.send(`Host name: ${hostName}\nHost arch: ${hostArch}`);
+    });
 
     const server = application.listen(process.env.PORT || 3030, () =>
     {
