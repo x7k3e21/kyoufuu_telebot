@@ -21,14 +21,14 @@ if(process.env.NODE_ENV == "production")
     const application = express();
 
     application.use(express.json());
-    application.use(grammy.webhookCallback(client, "express"));
+    application.use("/client/callback", grammy.webhookCallback(client, "express"));
 
     application.get("/debug", (request, response) =>
     {
         const hostName = os.hostname();
         const hostArch = os.machine();
 
-        response.set("Content-Type", "text/html")
+        response.set("Content-Type", "text/html");
         response.send(`<div>Host name: ${hostName}</div><div>Host arch: ${hostArch}</div>`);
     });
 
