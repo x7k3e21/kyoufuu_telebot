@@ -28,7 +28,8 @@ if(process.env.NODE_ENV == "production")
         const hostName = os.hostname();
         const hostArch = os.machine();
 
-        response.send(`Host name: ${hostName}\nHost arch: ${hostArch}`);
+        response.set("Content-Type", "text/html")
+        response.send(`<div>Host name: ${hostName}</div><div>Host arch: ${hostArch}</div>`);
     });
 
     const server = application.listen(process.env.PORT || 3030, () =>
