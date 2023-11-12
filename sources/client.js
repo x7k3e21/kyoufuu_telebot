@@ -9,6 +9,7 @@ const processID = process.pid;
 const client = new grammy.Bot(process.env.CLIENT_TOKEN || "");
 
 client.command("machine", require("./telegram/commands/debug/machine").execute);
+client.command("gpt", require("./telegram/commands/openai/gpt").execute);
 
 if(process.env.NODE_ENV == "production")
 {
