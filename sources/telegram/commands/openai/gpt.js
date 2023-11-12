@@ -22,5 +22,5 @@ module.exports.execute = async (context) =>
         }]
     });
 
-    await context.reply(chatCompletion.choices[0].message);
+    await context.reply(chatCompletion.choices[0].message.content);
 };
