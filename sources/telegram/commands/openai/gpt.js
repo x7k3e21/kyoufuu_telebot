@@ -3,22 +3,13 @@ const openai = require("openai");
 
 module.exports.execute = async (context) =>
 {
-    console.log(`Message content: ${context.message.text}`);
-
-    const userCredentials = context.message.text.split(" ");
-
     const userConfig = new openai.OpenAI
     ({
-        apiKey: userCredentials[1],
-        baseURL: "https://api.naga.ac/v1"
+        apiKey: process.env.OPENAI_API_TOKEN,
+        baseURL: process.env.OPENAI_API_URL
     });
 
-    console.log(`User credentials: ${userCredentials[1]} / ${userCredentials[2]}`);
-
-    const promptBeginning = context.message.text.search("\'");
-        
-    const userPrompt = context.message.text.slice(promptBeginning).slice(1, -1);
-
+    const userPrompt = context.message.text.slice(5);
     console.log(`User prompt: ${userPrompt}`);
 
     const chatCompletion = await userConfig.chat.completions.create
