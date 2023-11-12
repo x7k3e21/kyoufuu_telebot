@@ -8,13 +8,7 @@ const processID = process.pid;
 
 const client = new grammy.Bot(process.env.CLIENT_TOKEN || "");
 
-client.command("machine", async (context) =>
-{
-    const hostName = os.hostname();
-    const hostArch = os.machine();
-
-    await context.reply(`Host name: ${hostName}\nHost arch: ${hostArch}`);
-});
+client.command("machine", require("./telegram/commands/debug/machine").execute);
 
 if(process.env.NODE_ENV == "production")
 {
