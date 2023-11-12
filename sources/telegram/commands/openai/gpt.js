@@ -10,14 +10,14 @@ module.exports.execute = async (context) =>
     const userConfig = new openai.OpenAI
     ({
         apiKey: userCredentials[1],
-        baseURL: userCredentials[2]
+        baseURL: "https://api.naga.ac/v1"
     });
 
     console.log(`User credentials: ${userCredentials[1]} / ${userCredentials[2]}`);
 
     const promptBeginning = context.message.text.search("\'");
         
-    const userPrompt = context.message.text.slice(promptBeginning).slice(0, -1);
+    const userPrompt = context.message.text.slice(promptBeginning).slice(1, -1);
 
     console.log(`User prompt: ${userPrompt}`);
 
