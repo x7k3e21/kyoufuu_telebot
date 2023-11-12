@@ -7,9 +7,11 @@ module.exports.execute = async (context) =>
 
     const userCredentials = context.message.text.split(" ");
 
-    const userConfig = new openai.OpenAI();
-    userConfig.baseURL = userCredentials[1];
-    userConfig.apiKey = userCredentials[2];
+    const userConfig = new openai.OpenAI
+    ({
+        apiKey: userCredentials[1],
+        baseURL: userCredentials[2]
+    });
 
     console.log(`User credentials: ${userCredentials[1]} / ${userCredentials[2]}`);
 
