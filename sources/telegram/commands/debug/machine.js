@@ -13,15 +13,14 @@ module.exports.execute = async (context) =>
         const freeMemory = Math.round(os.freemem() >> 20);
         const totalMemory = Math.round(os.totalmem() >> 20);
 
-        const clientStatus = `
-            Process ID: ${processID}
-            ------------------------
-            Host address: ${hostName}
-            Host arch: ${hostArch}
-            ------------------------
-            Free RAM: ${freeMemory}/${totalMemory}Mb`;
+        const processStatus = `Process ID: ${processID}`;
+        await context.reply(processStatus);
 
-        await context.reply(clientStatus);
+        const hostStatus = `Host address: ${hostName}\nHost arch: ${hostArch}`;
+        await context.reply(hostStatus);
+
+        const memoryStatus = `Free RAM: ${freeMemory}/${totalMemory}Mb`;
+        await context.reply(memoryStatus);
     }
     else
     {
