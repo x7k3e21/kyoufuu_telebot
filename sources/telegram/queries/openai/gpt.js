@@ -1,7 +1,8 @@
 
 const openai = require("openai");
+const grammy = require("grammy");
 
-module.exports.execute = async (context) =>
+module.exports.query = async (context) =>
 {
     const userConfig = new openai.OpenAI
     ({
@@ -9,17 +10,18 @@ module.exports.execute = async (context) =>
         baseURL: process.env.OPENAI_API_URL
     });
 
-    const userPrompt = context.message.text.slice(5);
-
     const chatCompletion = await userConfig.chat.completions.create
     ({
         model: "gpt-3.5-turbo",
         messages: 
         [{
             role: "user",
-            content: userPrompt
+            content: context.inlineQuery.query
         }]
     });
 
-    await context.reply(chatCompletion.choices[0].message.content);
+    const inlineQueryAnswer = grammy.InlineQueryResultBuilder
+        .article("id-0", "GPT result").text(chatCompletion.choices[0].message.content);
+
+    await context.answerInlineQuery([inlineQueryAnswer]);
 };
