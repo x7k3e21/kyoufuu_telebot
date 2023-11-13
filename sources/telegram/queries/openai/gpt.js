@@ -10,6 +10,8 @@ module.exports.query = async (context) =>
         baseURL: process.env.OPENAI_API_URL
     });
 
+    console.log(`User query: ${context.inlineQuery.query}`);
+
     const chatCompletion = await userConfig.chat.completions.create
     ({
         model: "gpt-3.5-turbo",
