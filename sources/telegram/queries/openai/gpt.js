@@ -23,7 +23,7 @@ module.exports.query = async (context) =>
     });
 
     const inlineQueryAnswer = grammy.InlineQueryResultBuilder
-        .article("id-0", "GPT result").text(chatCompletion.choices[0].message.content);
+        .article("id-0", chatCompletion.choices[0].message.content).text(chatCompletion.choices[0].message.content);
 
     await context.answerInlineQuery([inlineQueryAnswer]);
 };
