@@ -11,6 +11,11 @@ const processID = process.pid;
 
 const client = new grammy.Bot(process.env.CLIENT_TOKEN || "");
 
+client.on("message", async (context) =>
+{
+    console.log(`Received new message from ${context.from.username}`);
+})
+
 const config = require("../config.json");
 
 const commandsPath = path.join(__dirname, config.client.commands);
