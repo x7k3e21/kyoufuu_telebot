@@ -1,6 +1,8 @@
 
 const openai = require("openai");
 
+module.exports.aliases = ["gpt"];
+
 module.exports.execute = async (context) =>
 {
     const userConfig = new openai.OpenAI

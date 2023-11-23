@@ -1,0 +1,7 @@
+{
+    "client":
+    {
+        "commands": "./telegram/commands/",
+        "queries": "./telegram/queries/"
+    }
+}

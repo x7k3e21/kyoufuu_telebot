@@ -1,6 +1,8 @@
 
 const os = require("node:os");
 
+module.exports.aliases = ["machine"]
+
 module.exports.execute = async (context) =>
 {
     if(context.from.id == process.env.CLIENT_OWNER_ID)
