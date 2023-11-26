@@ -3,5 +3,9 @@
     {
         "commands": "./telegram/commands/",
         "queries": "./telegram/queries/"
+    },
+    "server":
+    {
+        "middleware": "./server/middleware/"
     }
 }

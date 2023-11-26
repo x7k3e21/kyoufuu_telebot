@@ -16,6 +16,8 @@ const config = require("../config.json");
 const commandsPath = path.join(__dirname, config.client.commands);
 const queriesPath = path.join(__dirname, config.client.queries);
 
+const middlewarePath = path.join(__dirname, config.server.middleware);
+
 const commandsList = fs.readdirSync(commandsPath, { recursive: true });
 
 for (let commandFile of commandsList)
@@ -49,6 +51,33 @@ if(process.env.NODE_ENV == "production")
 
     application.use(express.json());
     application.use("/client/callback", grammy.webhookCallback(client, "express"));
+    
+    const middlewareList = fs.readdirSync(middlewarePath, { recursive: true });
+
+    for(let middlewareFile of middlewareList)
+    {
+        if(!middlewareFile.endsWith(".js"))
+        {
+            continue;
+        }
+
+        middlewareFile = middlewareFile.replace("\\", "/");
+        console.log(`Linking middleware ${middlewareFile}`);
+
+        const middlewareFilePath = path.join(middlewarePath, middlewareFile);
+    
+        try 
+        {
+            const middlewareModule = require(commandFilePath);
+            application.use(middlewareModule.middleware);
+        
+            console.log(`Linked middleware ${middlewareFile}`);
+        } 
+        catch (error) 
+        {
+            console.log(`Failed to link middleware ${middlewareFile}`);
+        }
+    }
 
     application.get("/debug", (request, response) =>
     {
