@@ -1,5 +1,5 @@
 
-module.exports.aliases = [ "shoot" ];
+module.exports.aliases = ["shoot"];
 
 module.exports.execute = async (context) =>
 {

@@ -1,7 +1,7 @@
 
 const os = require("node:os");
 
-module.exports.aliases = ["machine"]
+module.exports.aliases = ["machine"];
 
 module.exports.execute = async (context) =>
 {
