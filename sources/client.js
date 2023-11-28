@@ -47,6 +47,9 @@ for (let commandFile of commandsList)
 
 if(process.env.NODE_ENV == "production")
 {
+    //const dynamodb = require("@cyclic.sh/dynamodb");
+    //const database = dynamodb(process.env.CYCLIC_DB);
+
     const application = express();
 
     application.use(express.json());
@@ -68,7 +71,7 @@ if(process.env.NODE_ENV == "production")
     
         try 
         {
-            const middlewareModule = require(commandFilePath);
+            const middlewareModule = require(middlewareFilePath);
             application.use(middlewareModule.middleware);
         
             console.log(`Linked middleware ${middlewareFile}`);
