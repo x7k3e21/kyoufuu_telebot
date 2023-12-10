@@ -2,6 +2,8 @@
 const grammy = require("grammy");
 const express = require("express");
 
+const chat_members = require("@grammyjs/chat-members");
+
 const os = require("node:os");
 const fs = require("node:fs");
 
@@ -10,6 +12,9 @@ const path = require("node:path");
 const processID = process.pid;
 
 const client = new grammy.Bot(process.env.CLIENT_TOKEN || "");
+
+const chatMembersAdapter = new grammy.MemorySessionStorage();
+client.use(chat_members.chatMembers(chatMembersAdapter));
 
 const config = require("../config.json");
 
