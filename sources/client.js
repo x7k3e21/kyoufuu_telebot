@@ -50,6 +50,8 @@ for (let commandFile of commandsList)
     }
 }
 
+
+
 if(process.env.NODE_ENV == "production")
 {
     //const dynamodb = require("@cyclic.sh/dynamodb");
@@ -59,6 +61,14 @@ if(process.env.NODE_ENV == "production")
 
     application.use(express.json());
     application.use("/client/callback", grammy.webhookCallback(client, "express"));
+
+    application.use((error, request, response, handler) =>
+    {
+        console.log(JSON.stringify(request));
+        console.error(error);
+
+        handler();
+    });
     
     const middlewareList = fs.readdirSync(middlewarePath, { recursive: true });
 
