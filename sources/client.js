@@ -50,8 +50,6 @@ for (let commandFile of commandsList)
     }
 }
 
-
-
 if(process.env.NODE_ENV == "production")
 {
     //const dynamodb = require("@cyclic.sh/dynamodb");
