@@ -52,8 +52,17 @@ for (let commandFile of commandsList)
 
 if(process.env.NODE_ENV == "production")
 {
-    //const dynamodb = require("@cyclic.sh/dynamodb");
-    //const database = dynamodb(process.env.CYCLIC_DB);
+    const dynamodb = require("@cyclic.sh/dynamodb");
+    const database = dynamodb(process.env.CYCLIC_DB);
+
+    let usersCollection = database.collection("users");
+
+    client.use(async (context, handler) =>
+    {
+        context.database = { users: usersCollection };
+
+        await handler();
+    });
 
     const application = express();
 

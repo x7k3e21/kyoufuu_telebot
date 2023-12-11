@@ -1,5 +1,5 @@
 
-export interface Command
+export interface TelegramCommand
 {
     name: string,
     description: string,
