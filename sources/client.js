@@ -57,14 +57,20 @@ client.on("message:text", async (context) =>
     const commandName = messageContent[0];
     const commandArgs = messageContent.slice(1);
 
+    let commandScript = undefined;
+
     if(commandName.startsWith(clientPrefix))
     {
-        const commandScript = commandsMap.get(commandName.slice(1));
+        commandScript = commandsMap.get(commandName.slice(1));
+    }
+    else
+    {
+        commandScript = commandsMap.get(commandName);
+    }
 
-        if(commandScript != undefined)
-        {
-            commandScript(context);
-        }
+    if(commandScript != undefined)
+    {
+        commandScript(context);
     }
 });
 

@@ -1,11 +1,16 @@
 {
     "client":
     {
-        "commands": "./telegram/commands/v1",
-        "queries": "./telegram/queries/"
+        "commandsPrefix": "/",
+        
+        "paths":
+        {
+            "commandsPath": "telegram/commands",
+            "queriesPath": "telegram/queries"
+        }
     },
     "server":
     {
-        "middleware": "./server/middleware/"
+        "middlewarePath": "server/middleware"
     }
 }
